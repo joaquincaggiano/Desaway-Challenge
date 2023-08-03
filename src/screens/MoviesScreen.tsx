@@ -18,8 +18,6 @@ export const MoviesScreen = () => {
   return (
     <View style={{marginTop: top + 20, padding: 10}}>
       <CardMovie movie={moviesInCine[0]}/>
-      {/* <CardMovie movie={moviesInCine[1]}/>
-      <CardMovie movie={moviesInCine[2]}/> */}
     </View>
   );
 };
