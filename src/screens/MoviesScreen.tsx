@@ -30,7 +30,7 @@ export const MoviesScreen = () => {
               color: 'black',
               fontSize: 30,
               fontWeight: 'bold',
-              marginBottom: top + 20,
+              marginBottom: 20,
               marginTop: top + 20,
             }}>
             Películas

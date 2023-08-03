@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import {Movie, MoviesResponse} from '../interfaces/movieInterfaces';
-import axios from 'axios';
 import moviesDB from '../api/moviesDB';
 
 export const useMovies = () => {
