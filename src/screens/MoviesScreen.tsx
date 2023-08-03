@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import {View, Text, ActivityIndicator, FlatList} from 'react-native';
 import {useMovies} from '../hooks/useMovies';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { CardMovie } from '../components/CardMovie';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {CardMovie} from '../components/CardMovie';
 
 export const MoviesScreen = () => {
-  const {isLoading, moviesInCine} = useMovies();
+  const {isLoading, moviesInCine, getMovies} = useMovies();
   const {top} = useSafeAreaInsets();
 
   if (isLoading) {
@@ -16,8 +16,30 @@ export const MoviesScreen = () => {
     );
   }
   return (
-    <View style={{marginTop: top + 20, padding: 10}}>
-      <CardMovie movie={moviesInCine[0]}/>
+    <View style={{padding: 10}}>
+      <FlatList
+        data={moviesInCine}
+        keyExtractor={movie => movie.id.toString()}
+        showsVerticalScrollIndicator={false}
+        renderItem={({item}) => <CardMovie movie={item} />}
+        onEndReached={getMovies}
+        onEndReachedThreshold={0.4}
+        ListHeaderComponent={
+          <Text
+            style={{
+              color: 'black',
+              fontSize: 30,
+              fontWeight: 'bold',
+              marginBottom: top + 20,
+              marginTop: top + 20,
+            }}>
+            Películas
+          </Text>
+        }
+        ListFooterComponent={
+          <ActivityIndicator style={{height: 100}} size="large" color="grey" />
+        }
+      />
     </View>
   );
 };
