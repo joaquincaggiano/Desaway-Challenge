@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, ActivityIndicator} from 'react-native';
 import {useMovies} from '../hooks/useMovies';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { CardMovie } from '../components/CardMovie';
 
 export const MoviesScreen = () => {
   const {isLoading, moviesInCine} = useMovies();
@@ -15,8 +16,10 @@ export const MoviesScreen = () => {
     );
   }
   return (
-    <View style={{marginTop: top + 20}}>
-      <Text>MoviesScreen</Text>
+    <View style={{marginTop: top + 20, padding: 10}}>
+      <CardMovie movie={moviesInCine[0]}/>
+      {/* <CardMovie movie={moviesInCine[1]}/>
+      <CardMovie movie={moviesInCine[2]}/> */}
     </View>
   );
 };
