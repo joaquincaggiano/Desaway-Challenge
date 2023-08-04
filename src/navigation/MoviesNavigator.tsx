@@ -4,12 +4,12 @@ import {MoviesScreen} from '../screens/MoviesScreen';
 import {MovieDetails} from '../screens/MovieDetails';
 import { Movie } from '../interfaces/movieInterfaces';
 
-export type RootStackParams = {
+export type RootStackParamsMovie = {
   MoviesScreen: undefined;
   MovieDetails: Movie;
 };
 
-const Stack = createStackNavigator<RootStackParams>();
+const Stack = createStackNavigator<RootStackParamsMovie>();
 
 export const MoviesNavigator = () => {
   return (

@@ -10,16 +10,17 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Movie} from '../interfaces/movieInterfaces';
+import {Serie} from '../interfaces/serieInterfaces';
 
 const heightDimension = Dimensions.get('screen').height;
 
 interface Props {
   uri: string;
-  movie: Movie;
+  media: Movie | Serie;
   onPress: () => void;
 }
 
-export const CardMovieDetail = ({uri, movie, onPress}: Props) => {
+export const CardMediaDetail = ({uri, media, onPress}: Props) => {
   return (
     <ScrollView>
       <View style={styles.imageContainer}>
@@ -29,9 +30,14 @@ export const CardMovieDetail = ({uri, movie, onPress}: Props) => {
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.title}>{movie.title}</Text>
-        <Text style={styles.popularity}>{movie.popularity}</Text>
-        <Text style={styles.overview}>{movie.overview}</Text>
+        {/*@ts-ignore */}
+        <Text style={styles.title}>{media.title || media.name}</Text>
+        <Text style={styles.popularity}>{media.popularity}</Text>
+        <Text style={styles.overview}>
+          {media.overview
+            ? media.overview
+            : 'Por el momento no hay descripción'}
+        </Text>
       </View>
 
       {/* Botón para regresar */}

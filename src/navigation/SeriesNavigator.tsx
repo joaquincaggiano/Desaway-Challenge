@@ -2,8 +2,14 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {SeriesScreen} from '../screens/SeriesScreen';
 import {SerieDetails} from '../screens/SerieDetails';
+import { Serie } from '../interfaces/serieInterfaces';
 
-const Stack = createStackNavigator();
+export type RootStackParamsSerie = {
+  SeriesScreen: undefined;
+  SerieDetails: Serie;
+};
+
+const Stack = createStackNavigator<RootStackParamsSerie>();
 
 export const SeriesNavigator = () => {
   return (

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Dimensions,
-  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,30 +8,34 @@ import {
 } from 'react-native';
 import {Movie} from '../interfaces/movieInterfaces';
 import {useNavigation} from '@react-navigation/native';
+import { FadeInImage } from './FadeInImage';
+import { Serie } from '../interfaces/serieInterfaces';
 
 interface Props {
-  movie: Movie;
+  media: Movie | Serie;
+  mediaDetail: string;
 }
 
 const widthDimension = Dimensions.get('screen').width;
 
-export const CardMovie = ({movie}: Props) => {
-  const uri = `https://image.tmdb.org/t/p/w500/${movie?.poster_path}`;
-  const overview = movie?.overview.split(' ', 25).join(' ');
+export const CardMedia = ({media, mediaDetail}: Props) => {
+  const uri = `https://image.tmdb.org/t/p/w500/${media?.poster_path}`;
+  const overview = media?.overview.split(' ', 25).join(' ');
   const navigation = useNavigation<any>();
 
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      onPress={() => navigation.navigate('MovieDetails', movie)}>
+      onPress={() => navigation.navigate(mediaDetail, media)}>
       <View style={styles.cardContainer}>
-        <View style={styles.infoContainer}>
-          <Image source={{uri}} style={styles.image} />
+        <View style={styles.imageContainer}>
+          <FadeInImage uri={uri} style={styles.image}/>
         </View>
 
-        <View style={{...styles.infoContainer, padding: 5}}>
-          <Text style={styles.titleText}>{movie?.title}</Text>
-          <Text style={styles.popularityText}>{movie?.popularity}</Text>
+        <View style={styles.infoContainer}>
+          {/*@ts-ignore */}
+          <Text style={styles.titleText}>{media?.title || media?.name}</Text>
+          <Text style={styles.popularityText}>{media?.popularity}</Text>
           <Text style={styles.overviewText}>{overview}...</Text>
         </View>
       </View>
@@ -58,10 +61,16 @@ const styles = StyleSheet.create({
 
     elevation: 10,
   },
+  imageContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderRadius: 15,
+  },
   infoContainer: {
     flex: 1,
     backgroundColor: 'white',
     borderRadius: 15,
+    padding: 5
   },
   image: {
     flex: 1,

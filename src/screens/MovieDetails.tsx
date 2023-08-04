@@ -1,23 +1,14 @@
-import {StackScreenProps} from '@react-navigation/stack';
 import React from 'react';
+import {StackScreenProps} from '@react-navigation/stack';
 import {
   View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
   ActivityIndicator,
 } from 'react-native';
-import {RootStackParams} from '../navigation/MoviesNavigator';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {RootStackParamsMovie} from '../navigation/MoviesNavigator';
 import {useMovies} from '../hooks/useMovies';
-import {CardMovieDetail} from '../components/CardMovieDetail';
+import {CardMediaDetail} from '../components/CardMediaDetail';
 
-interface Props extends StackScreenProps<RootStackParams, 'MovieDetails'> {}
-
-const heightDimension = Dimensions.get('screen').height;
+interface Props extends StackScreenProps<RootStackParamsMovie, 'MovieDetails'> {}
 
 export const MovieDetails = ({route, navigation}: Props) => {
   const movie = route.params;
@@ -31,9 +22,9 @@ export const MovieDetails = ({route, navigation}: Props) => {
           <ActivityIndicator size="large" color="black" />
         </View>
       ) : (
-        <CardMovieDetail
+        <CardMediaDetail
           uri={uri}
-          movie={movie}
+          media={movie}
           onPress={() => navigation.pop()}
         />
       )}
